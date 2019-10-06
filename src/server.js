@@ -1,10 +1,11 @@
 import mongodb from 'mongodb';
 import { ObjectId } from 'mongodb';
 import cors from 'cors';
+require('dotenv').config()
 
 const url = "mongodb://localhost:27017/scheduler";
 let mongoDb = null;
-mongodb.connect(url, (err, db) => {
+mongodb.connect(process.env.MONGODB_URI || url, (err, db) => {
   if (err) throw err;
   mongoDb = db.db("scheduler");
 });
@@ -13,7 +14,7 @@ let express = require('express'),
 app = express();
 app.use(express.json());
 app.use(cors());
-const port = 4000;
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
 });
 
