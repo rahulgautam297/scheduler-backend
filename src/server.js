@@ -7,7 +7,7 @@ const url = "mongodb://localhost:27017/scheduler";
 let mongoDb = null;
 mongodb.connect(process.env.MONGODB_URI || url, (err, db) => {
   if (err) throw err;
-  mongoDb = db.db("scheduler");
+  mongoDb = db.db(process.env.MONGODB_NAME || "scheduler");
 });
 
 let express = require('express'),
